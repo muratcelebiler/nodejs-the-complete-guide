@@ -8,6 +8,14 @@ const express = require('express');
 // Express core kısmında bir fonksiyon döndüğü için core kısmını initilaize ediyoruz.
 const app = express();
 
+// Middleware ekliyoruz
+app.use((req, res, next) => {
+    console.log("Middleware 1");
+
+    // Bu komutu eklemediğimizde bir sonraki aşamaya geçemiyoruz ve bu middleware içerisinde hapsoluyoruz.
+    next();
+});
+
 // Bir server oluşturuyoruz.
 const server = http.createServer(app);
 
