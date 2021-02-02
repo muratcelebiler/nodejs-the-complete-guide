@@ -1,3 +1,6 @@
+// Nodejs core kütüphanesinden path modülünü dahil ediyoruz
+const path = require("path");
+
 // Express kütüphanesini dahil ediyoruz.
 const express = require("express");
 
@@ -6,7 +9,8 @@ const router = express.Router();
 
 // ürünlerin kaydedilmesi için bir form oluşturduk.
 router.get('/add-product', (req, res, next) => {
-    res.send('<form action="/admin/add-product" method="post"><input type="text" name="title"><button type="submit">Add Product</button></form>');
+    // Views anadizinine erişmek için path.join methodunu kullanarak ardışık klasör ve dosyaları yanyana gelecek şekilde sıralıyoruz.
+    res.sendFile(path.join(__dirname, '../', 'views', 'add-product.html'));
 });
 
 // ürünlerin kaydedileceği endpointi oluşturduk. 
