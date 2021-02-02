@@ -13,8 +13,7 @@ router.get('/add-product', (req, res, next) => {
 router.post('/product', (req, res, next) => {
     console.log(req.body);
 
-    // Bu komutu eklemediğimizde bir sonraki aşamaya geçemiyoruz ve bu middleware içerisinde hapsoluyoruz.
-    next();
+    res.send('<h1>Shop Home Page</h1>')
 });
 
 module.exports = router;

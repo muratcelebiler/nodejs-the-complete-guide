@@ -18,6 +18,11 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(adminRoutes);
 app.use(shopRoutes);
 
+// Sistemde olmayan sayfaları yakalamak için bir middleware ekledik.
+app.use((req, res, next) => {
+    res.status(404).send("<h1>Page Not Found</h1>");
+});
+
 // Express de default http modülü yüklü olarak(require) gelmektedir. 
 // Biz app.listen() ile aslında http.createServer() methodunu çağırıp server oluşturmatayız.
 // Detaylar için aşağıdaki url den expressjs'in github reposuna erişerek application.js dosyasındaki listen() methodunu inceleyebiliriz.
