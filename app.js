@@ -7,6 +7,9 @@ const express = require("express");
 // Body parser eklentisini dahil ediyoruz. Bu eklenti ile gelen requesti parse ediyoruz
 const bodyParser = require("body-parser");
 
+// Util
+const pathDir = require("./util/path");
+
 // Express core kısmında bir fonksiyon döndüğü için core kısmını initilaize ediyoruz.
 const app = express();
 
@@ -23,7 +26,7 @@ app.use(shopRoutes);
 
 // Sistemde olmayan sayfaları yakalamak için bir middleware ekledik.
 app.use((req, res, next) => {
-    res.status(404).sendFile(path.join(__dirname, "views", "404.html"));
+    res.status(404).sendFile(path.join(pathDir, "views", "404.html"));
 });
 
 // Express de default http modülü yüklü olarak(require) gelmektedir. 
