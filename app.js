@@ -20,6 +20,9 @@ const shopRoutes = require("./routes/shop");
 // Body parser ile ana yapımızı kuruyoruz.
 app.use(bodyParser.urlencoded({extended: false}));
 
+// Express static'lerini ekliyoruz.
+app.use(express.static(path.join(pathDir, 'public')));
+
 // Router'ları express js içerisine tanımlıyoruz
 app.use('/admin', adminRoutes);
 app.use(shopRoutes);
