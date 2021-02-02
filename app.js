@@ -15,7 +15,7 @@ const shopRoutes = require("./routes/shop");
 app.use(bodyParser.urlencoded({extended: false}));
 
 // Router'ları express js içerisine tanımlıyoruz
-app.use(adminRoutes);
+app.use('/admin', adminRoutes);
 app.use(shopRoutes);
 
 // Sistemde olmayan sayfaları yakalamak için bir middleware ekledik.
