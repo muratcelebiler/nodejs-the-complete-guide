@@ -1,39 +1,29 @@
-// Nodejs path methodunu dahil ediyoruz
-const path = require("path");
+const path = require('path');
 
-// Express kütüphanesini dahil ediyoruz.
-const express = require("express");
+const express = require('express');
+const bodyParser = require('body-parser');
 
-// Body parser eklentisini dahil ediyoruz. Bu eklenti ile gelen requesti parse ediyoruz
-const bodyParser = require("body-parser");
-
-// Util
-const pathDir = require("./util/path");
-
-// Express core kısmında bir fonksiyon döndüğü için core kısmını initilaize ediyoruz.
 const app = express();
 
-// Router'ları dahil ediyoruz
-const adminRoutes = require("./routes/admin");
-const shopRoutes = require("./routes/shop");
+app.set('view engine', 'ejs');
+app.set('views', 'views');
 
-// Body parser ile ana yapımızı kuruyoruz.
-app.use(bodyParser.urlencoded({extended: false}));
+const adminData = require('./routes/admin');
+const shopRoutes = require('./routes/shop');
 
-// Express static'lerini ekliyoruz.
-app.use(express.static(path.join(pathDir, 'public')));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, 'public')));
 
-// Router'ları express js içerisine tanımlıyoruz
-app.use('/admin', adminRoutes);
+app.use('/admin', adminData.routes);
 app.use(shopRoutes);
 
-// Sistemde olmayan sayfaları yakalamak için bir middleware ekledik.
 app.use((req, res, next) => {
-    res.status(404).sendFile(path.join(pathDir, "views", "404.html"));
+  res.status(404).render('404', 
+    { 
+      pageTitle: 'Page Not Found',
+      path : '/'
+    }
+);
 });
 
-// Express de default http modülü yüklü olarak(require) gelmektedir. 
-// Biz app.listen() ile aslında http.createServer() methodunu çağırıp server oluşturmatayız.
-// Detaylar için aşağıdaki url den expressjs'in github reposuna erişerek application.js dosyasındaki listen() methodunu inceleyebiliriz.
-// Repo url: https://github.com/expressjs/express/blob/master/lib/application.js
 app.listen(3000);
