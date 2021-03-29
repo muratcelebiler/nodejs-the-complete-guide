@@ -1,10 +1,10 @@
-const path = require('path');
-
 const express = require('express');
 
-const shopController = require('../controllers/shop');
-
+// Initialize router
 const router = express.Router();
+
+// Controller
+const shopController = require('../controllers/shop');
 
 router.get('/', shopController.getIndex);
 
@@ -16,4 +16,5 @@ router.get('/orders', shopController.getOrders);
 
 router.get('/checkout', shopController.getCheckout);
 
+// Export module
 module.exports = router;
