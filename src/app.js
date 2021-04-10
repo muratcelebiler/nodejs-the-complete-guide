@@ -3,6 +3,18 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 
+// Veritabanını kullanmak için projeye dahil ediyoruz
+const db = require('./util/database');
+
+// Test için bir query sorgusu atıyoruz
+db.execute('SELECT * FROM products')
+    .then(result => {
+        console.log('db result: ', result)
+    })
+    .catch(err => {
+        console.log('db error: ', err)
+});
+
 const errorController = require('./controllers/error');
 
 const app = express();
